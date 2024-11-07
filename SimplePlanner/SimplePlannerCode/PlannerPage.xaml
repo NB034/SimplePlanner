@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SimplePlanner.SimplePlannerCode.PlannerPage"
+             xmlns:code="clr-namespace:SimplePlanner.SimplePlannerCode"
+             x:DataType="code:PlannerPageViewModel"
+             Title="SimplePlanner">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Orange"/>
+                <Setter Property="Padding" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Padding" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <FlexLayout HorizontalOptions="Center" Margin="0,10,0,0">
+            <Label Text="Пн" Style="{StaticResource LabelStyle}"/>
+            <Label Text="Вт" Style="{StaticResource LabelStyle}"/>
+            <Label Text="Ср" Style="{StaticResource LabelStyle}"/>
+            <Label Text="Чт" Style="{StaticResource LabelStyle}"/>
+            <Label Text="Пт" Style="{StaticResource LabelStyle}"/>
+            <Label Text="Сб" Style="{StaticResource LabelStyle}"/>
+            <Label Text="Вс" Style="{StaticResource LabelStyle}"/>
+        </FlexLayout>
+
+        <CollectionView ItemsSource="{Binding Marks}" ItemsLayout="VerticalGrid, 7" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="code:MarkViewModel">
+                    <CheckBox Margin="0,5,0,5" IsChecked="{Binding IsChecked}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="5">
+            <Button Text="Очистить" Style="{StaticResource ButtonStyle}" Command="{Binding ClearCommand}"/>
+            <Button Text="Сохранить" Style="{StaticResource ButtonStyle}" Command="{Binding SaveCommand}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
